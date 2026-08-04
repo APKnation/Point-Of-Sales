@@ -1,0 +1,136 @@
+import os
+
+base_path = "src"
+
+files = {
+    "layouts/MainLayout.jsx": """import React, { useState } from 'react';
+import { Outlet } from 'react-router-dom';
+import Sidebar from '../components/Sidebar';
+import Navbar from '../components/Navbar';
+
+const MainLayout = () => {
+    const [sidebarOpen, setSidebarOpen] = useState(true);
+
+    return (
+        <div className="flex h-screen bg-background overflow-hidden">
+            <Sidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
+            <div className="flex flex-col flex-1 overflow-hidden">
+                <Navbar toggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
+                <main className="flex-1 overflow-x-hidden overflow-y-auto bg-background p-6">
+                    <Outlet />
+                </main>
+            </div>
+        </div>
+    );
+};
+
+export default MainLayout;
+""",
+    "components/Sidebar.jsx": """import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { 
+    FiHome, FiBox, FiUsers, FiShoppingCart, 
+    FiSettings, FiLogOut, FiList, FiTrendingUp 
+} from 'react-icons/fi';
+import { useAuth } from '../hooks/useAuth';
+
+const Sidebar = ({ isOpen, setIsOpen }) => {
+    const location = useLocation();
+    const { logout, userRole } = useAuth();
+
+    const menuItems = [
+        { path: '/dashboard', icon: <FiHome />, label: 'Dashboard', roles: ['ROLE_ADMIN', 'ROLE_MANAGER'] },
+        { path: '/pos', icon: <FiShoppingCart />, label: 'POS', roles: ['ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_CASHIER'] },
+        { path: '/products', icon: <FiBox />, label: 'Products', roles: ['ROLE_ADMIN', 'ROLE_MANAGER'] },
+        { path: '/categories', icon: <FiList />, label: 'Categories', roles: ['ROLE_ADMIN', 'ROLE_MANAGER'] },
+        { path: '/sales', icon: <FiTrendingUp />, label: 'Sales History', roles: ['ROLE_ADMIN', 'ROLE_MANAGER'] },
+        { path: '/customers', icon: <FiUsers />, label: 'Customers', roles: ['ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_CASHIER'] },
+        { path: '/settings', icon: <FiSettings />, label: 'Settings', roles: ['ROLE_ADMIN'] },
+    ];
+
+    const filteredMenu = menuItems.filter(item => item.roles.includes(userRole));
+
+    return (
+        <div className={`bg-secondary text-white transition-all duration-300 flex flex-col ${isOpen ? 'w-64' : 'w-20'} flex-shrink-0`}>
+            <div className="h-16 flex items-center justify-center border-b border-gray-700">
+                <h1 className={`font-bold text-xl ${!isOpen && 'hidden'}`}>POS Pro</h1>
+                {!isOpen && <span className="font-bold text-xl">P</span>}
+            </div>
+            
+            <div className="flex-1 overflow-y-auto py-4">
+                <nav className="space-y-1 px-2">
+                    {filteredMenu.map((item) => {
+                        const isActive = location.pathname === item.path;
+                        return (
+                            <Link
+                                key={item.path}
+                                to={item.path}
+                                className={`flex items-center px-3 py-3 rounded-md transition-colors ${
+                                    isActive ? 'bg-primary text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                                }`}
+                            >
+                                <div className={`flex-shrink-0 ${isOpen ? 'mr-3' : 'mx-auto'}`}>
+                                    {React.cloneElement(item.icon, { className: 'w-5 h-5' })}
+                                </div>
+                                <span className={`${!isOpen && 'hidden'}`}>{item.label}</span>
+                            </Link>
+                        );
+                    })}
+                </nav>
+            </div>
+            
+            <div className="p-4 border-t border-gray-700">
+                <button 
+                    onClick={logout}
+                    className="flex items-center w-full px-3 py-2 text-gray-300 rounded-md hover:bg-danger hover:text-white transition-colors"
+                >
+                    <FiLogOut className={`w-5 h-5 ${isOpen ? 'mr-3' : 'mx-auto'}`} />
+                    <span className={`${!isOpen && 'hidden'}`}>Logout</span>
+                </button>
+            </div>
+        </div>
+    );
+};
+
+export default Sidebar;
+""",
+    "components/Navbar.jsx": """import React from 'react';
+import { FiMenu, FiBell, FiUser } from 'react-icons/fi';
+
+const Navbar = ({ toggleSidebar }) => {
+    return (
+        <header className="bg-white shadow-sm h-16 flex items-center justify-between px-6 z-10">
+            <div className="flex items-center">
+                <button 
+                    onClick={toggleSidebar}
+                    className="text-gray-500 hover:text-primary focus:outline-none"
+                >
+                    <FiMenu className="w-6 h-6" />
+                </button>
+            </div>
+            
+            <div className="flex items-center space-x-4">
+                <button className="text-gray-500 hover:text-primary relative">
+                    <FiBell className="w-5 h-5" />
+                    <span className="absolute top-0 right-0 block h-2 w-2 rounded-full bg-danger ring-2 ring-white"></span>
+                </button>
+                
+                <div className="flex items-center cursor-pointer">
+                    <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white">
+                        <FiUser className="w-4 h-4" />
+                    </div>
+                </div>
+            </div>
+        </header>
+    );
+};
+
+export default Navbar;
+"""
+}
+
+for filepath, content in files.items():
+    with open(os.path.join(base_path, filepath), "w") as f:
+        f.write(content)
+
+print("Layouts and Components created successfully.")
