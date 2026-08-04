@@ -4,12 +4,11 @@ import { AuthProvider } from './context/AuthContext';
 import ProtectedRoutes from './routes/ProtectedRoutes';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
-
+import POS from './pages/POS';
+import Products from './pages/Products';
+import Customers from './pages/Customers';
+import SalesHistory from './pages/SalesHistory';
 import MainLayout from './layouts/MainLayout';
-
-// Placeholder for now
-const POS = () => <div className="p-8"><h1 className="text-2xl font-bold">POS Interface</h1></div>;
-const Products = () => <div className="p-8"><h1 className="text-2xl font-bold">Products</h1></div>;
 
 function App() {
   return (
@@ -23,10 +22,10 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/pos" element={<POS />} />
               <Route path="/products" element={<Products />} />
-              <Route path="/categories" element={<div>Categories</div>} />
-              <Route path="/sales" element={<div>Sales History</div>} />
-              <Route path="/customers" element={<div>Customers</div>} />
-              <Route path="/settings" element={<div>Settings</div>} />
+              <Route path="/categories" element={<div className="p-8"><h1 className="text-2xl font-bold">Categories</h1><p className="text-gray-500 mt-2">Coming soon...</p></div>} />
+              <Route path="/sales" element={<SalesHistory />} />
+              <Route path="/customers" element={<Customers />} />
+              <Route path="/settings" element={<div className="p-8"><h1 className="text-2xl font-bold">Settings</h1><p className="text-gray-500 mt-2">Coming soon...</p></div>} />
             </Route>
           </Route>
           
