@@ -10,6 +10,10 @@ import Customers from './pages/Customers';
 import SalesHistory from './pages/SalesHistory';
 import MainLayout from './layouts/MainLayout';
 
+import Categories from './pages/Categories';
+import Reports from './pages/Reports';
+import Settings from './pages/Settings';
+
 function App() {
   return (
     <BrowserRouter>
@@ -22,10 +26,11 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/pos" element={<POS />} />
               <Route path="/products" element={<Products />} />
-              <Route path="/categories" element={<div className="p-8"><h1 className="text-2xl font-bold">Categories</h1><p className="text-gray-500 mt-2">Coming soon...</p></div>} />
+              <Route path="/categories" element={<Categories />} />
               <Route path="/sales" element={<SalesHistory />} />
               <Route path="/customers" element={<Customers />} />
-              <Route path="/settings" element={<div className="p-8"><h1 className="text-2xl font-bold">Settings</h1><p className="text-gray-500 mt-2">Coming soon...</p></div>} />
+              <Route path="/reports" element={<Reports />} />
+              <Route path="/settings" element={<Settings />} />
             </Route>
           </Route>
           
