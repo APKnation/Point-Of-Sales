@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { FiCheckCircle, FiShoppingCart, FiCreditCard } from 'react-icons/fi';
+import { FiCheckCircle, FiShoppingCart, FiCreditCard, FiZap, FiShield, FiBarChart2 } from 'react-icons/fi';
 
 const Landing = () => {
     const [products, setProducts] = useState([]);
@@ -46,6 +46,45 @@ const Landing = () => {
                     <a href="#how-it-works" className="px-8 py-4 bg-white border border-gray-200 text-gray-700 rounded-full font-bold hover:bg-gray-50 transition-colors">How it works</a>
                 </div>
             </header>
+
+            {/* Core Features */}
+            <section className="py-24 bg-gray-50">
+                <div className="max-w-7xl mx-auto px-8">
+                    <div className="text-center mb-16">
+                        <h2 className="text-3xl font-bold text-secondary mb-4">Why Choose POS Pro?</h2>
+                        <p className="text-gray-500">Everything you need to run your retail business efficiently.</p>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                            <div className="w-14 h-14 bg-blue-50 text-primary rounded-xl flex items-center justify-center mb-6">
+                                <FiZap className="w-6 h-6" />
+                            </div>
+                            <h3 className="text-xl font-bold text-secondary mb-3">Lightning Fast</h3>
+                            <p className="text-gray-500 leading-relaxed">
+                                Our optimized barcode scanning and checkout flow ensures your queues keep moving, even during rush hours.
+                            </p>
+                        </div>
+                        <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                            <div className="w-14 h-14 bg-green-50 text-green-500 rounded-xl flex items-center justify-center mb-6">
+                                <FiBarChart2 className="w-6 h-6" />
+                            </div>
+                            <h3 className="text-xl font-bold text-secondary mb-3">Real-time Analytics</h3>
+                            <p className="text-gray-500 leading-relaxed">
+                                Make data-driven decisions with real-time sales dashboards, inventory tracking, and comprehensive reports.
+                            </p>
+                        </div>
+                        <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                            <div className="w-14 h-14 bg-purple-50 text-purple-500 rounded-xl flex items-center justify-center mb-6">
+                                <FiShield className="w-6 h-6" />
+                            </div>
+                            <h3 className="text-xl font-bold text-secondary mb-3">Secure & Reliable</h3>
+                            <p className="text-gray-500 leading-relaxed">
+                                Built on enterprise-grade architecture with role-based access control to keep your business data safe.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             {/* Featured Products */}
             <section id="products" className="py-20 px-8 max-w-7xl mx-auto">
@@ -115,6 +154,18 @@ const Landing = () => {
                             </p>
                         </div>
                     </div>
+                </div>
+            </section>
+
+            {/* CTA Section */}
+            <section className="bg-primary py-20 px-8 text-center relative overflow-hidden">
+                <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
+                <div className="max-w-3xl mx-auto relative z-10">
+                    <h2 className="text-4xl font-bold text-white mb-6">Ready to upgrade your store?</h2>
+                    <p className="text-blue-100 mb-10 text-lg">Join thousands of merchants who are growing their businesses with POS Pro.</p>
+                    <Link to="/login" className="inline-block px-10 py-4 bg-white text-primary rounded-full font-bold shadow-xl hover:shadow-2xl hover:scale-105 transition-all">
+                        Get Started Now
+                    </Link>
                 </div>
             </section>
 
