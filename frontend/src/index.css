@@ -1,11 +1,19 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
-  body {
-    @apply bg-background text-secondary font-sans antialiased;
-  }
+@theme {
+  --color-primary: #2563EB;
+  --color-secondary: #0F172A;
+  --color-success: #22C55E;
+  --color-warning: #F59E0B;
+  --color-danger: #EF4444;
+  --color-background: #F8FAFC;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-secondary);
+  font-family: sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* Custom Scrollbar */
@@ -15,14 +23,14 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9; 
+  background: #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1; 
+  background: #cbd5e1;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8; 
+  background: #94a3b8;
 }
