@@ -1,28 +1,83 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FiDollarSign, FiShoppingBag, FiUsers, FiBox } from 'react-icons/fi';
 import { 
     LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
     BarChart, Bar
 } from 'recharts';
+import api from '../services/api';
+import { getAllSales } from '../services/saleService';
 
 const Dashboard = () => {
-    // Mock Data
+    const [stats, setStats] = useState({
+        todaySales: 0,
+        monthlySales: 0,
+        totalProducts: 0,
+        totalCustomers: 0,
+        lowStockProducts: 0
+    });
+    
+    const [salesData, setSalesData] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchDashboardData = async () => {
+            try {
+                // Fetch stats from Dashboard API
+                const statsRes = await api.get('/dashboard');
+                setStats(statsRes.data);
+
+                // Fetch real sales to generate chart data
+                const salesRes = await getAllSales();
+                const rawSales = salesRes.data;
+
+                // Create a map of Date -> Total Sales
+                const salesMap = {};
+                
+                // Initialize last 7 days with 0
+                for (let i = 6; i >= 0; i--) {
+                    const d = new Date();
+                    d.setDate(d.getDate() - i);
+                    salesMap[d.toLocaleDateString('en-US', { weekday: 'short' })] = 0;
+                }
+
+                // Populate with real data
+                rawSales.forEach(sale => {
+                    const dateStr = new Date(sale.saleDate).toLocaleDateString('en-US', { weekday: 'short' });
+                    if (salesMap[dateStr] !== undefined) {
+                        salesMap[dateStr] += sale.grandTotal;
+                    }
+                });
+
+                const formattedSalesData = Object.keys(salesMap).map(key => ({
+                    name: key,
+                    sales: salesMap[key]
+                }));
+
+                setSalesData(formattedSalesData);
+            } catch (err) {
+                console.error("Failed to load dashboard data", err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchDashboardData();
+    }, []);
+
     const summaryCards = [
-        { title: "Today's Sales", value: "$2,450.00", icon: <FiDollarSign />, color: "bg-primary" },
-        { title: "Total Products", value: "345", icon: <FiBox />, color: "bg-success" },
-        { title: "Total Customers", value: "1,204", icon: <FiUsers />, color: "bg-warning" },
-        { title: "Today's Orders", value: "45", icon: <FiShoppingBag />, color: "bg-danger" },
+        { title: "Today's Sales", value: `$${stats.todaySales?.toFixed(2) || '0.00'}`, icon: <FiDollarSign />, color: "bg-primary" },
+        { title: "Total Products", value: stats.totalProducts || 0, icon: <FiBox />, color: "bg-success" },
+        { title: "Total Customers", value: stats.totalCustomers || 0, icon: <FiUsers />, color: "bg-warning" },
+        { title: "Low Stock Items", value: stats.lowStockProducts || 0, icon: <FiShoppingBag />, color: "bg-danger" },
     ];
 
-    const salesData = [
-        { name: 'Mon', sales: 4000 },
-        { name: 'Tue', sales: 3000 },
-        { name: 'Wed', sales: 2000 },
-        { name: 'Thu', sales: 2780 },
-        { name: 'Fri', sales: 1890 },
-        { name: 'Sat', sales: 2390 },
-        { name: 'Sun', sales: 3490 },
-    ];
+    if (loading) {
+        return (
+            <div className="flex justify-center py-12 text-secondary">
+                <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-primary"></div>
+            </div>
+        );
+    }
 
     return (
         <div className="space-y-6">
@@ -62,7 +117,7 @@ const Dashboard = () => {
                 </div>
 
                 <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                    <h2 className="text-lg font-bold text-secondary mb-4">Sales by Category</h2>
+                    <h2 className="text-lg font-bold text-secondary mb-4">Sales Volume (Weekly)</h2>
                     <div className="h-80">
                         <ResponsiveContainer width="100%" height="100%">
                             <BarChart data={salesData}>
