@@ -24,41 +24,61 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
     const filteredMenu = menuItems.filter(item => item.roles.includes(userRole));
 
     return (
-        <div className={`bg-secondary text-white transition-all duration-300 flex flex-col ${isOpen ? 'w-64' : 'w-20'} flex-shrink-0`}>
-            <div className="h-16 flex items-center justify-center border-b border-gray-700">
-                <h1 className={`font-bold text-xl ${!isOpen && 'hidden'}`}>POS Pro</h1>
-                {!isOpen && <span className="font-bold text-xl">P</span>}
+        <div className={`flex flex-col flex-shrink-0 transition-all duration-300 ${isOpen ? 'w-60' : 'w-[72px]'}`}
+            style={{ background: '#1f1633', borderRight: '1px solid #362d59' }}>
+
+            {/* Logo */}
+            <div className="h-16 flex items-center px-4 gap-3" style={{ borderBottom: '1px solid #362d59' }}>
+                <div className="flex-shrink-0">
+                    <span style={{
+                        background: '#c2ef4e', color: '#1f1633',
+                        borderRadius: 6, padding: '2px 7px',
+                        fontWeight: 900, fontSize: 13, letterSpacing: '.04em'
+                    }}>POS</span>
+                </div>
+                {isOpen && <span style={{ color: '#e8e4ed', fontWeight: 700, fontSize: 16 }}>Pro</span>}
             </div>
-            
-            <div className="flex-1 overflow-y-auto py-4">
-                <nav className="space-y-1 px-2">
-                    {filteredMenu.map((item) => {
-                        const isActive = location.pathname === item.path;
-                        return (
-                            <Link
-                                key={item.path}
-                                to={item.path}
-                                className={`flex items-center px-3 py-3 rounded-md transition-colors ${
-                                    isActive ? 'bg-primary text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-                                }`}
-                            >
-                                <div className={`flex-shrink-0 ${isOpen ? 'mr-3' : 'mx-auto'}`}>
-                                    {React.cloneElement(item.icon, { className: 'w-5 h-5' })}
-                                </div>
-                                <span className={`${!isOpen && 'hidden'}`}>{item.label}</span>
-                            </Link>
-                        );
-                    })}
-                </nav>
+
+            {/* Nav items */}
+            <div className="flex-1 overflow-y-auto py-4 px-2 space-y-1">
+                {filteredMenu.map((item) => {
+                    const isActive = location.pathname === item.path;
+                    return (
+                        <Link
+                            key={item.path}
+                            to={item.path}
+                            title={!isOpen ? item.label : ''}
+                            className="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all"
+                            style={{
+                                background: isActive ? 'rgba(194,239,78,.12)' : 'transparent',
+                                color: isActive ? '#c2ef4e' : '#79628c',
+                                fontWeight: isActive ? 600 : 500,
+                                fontSize: 14,
+                                borderLeft: isActive ? '2px solid #c2ef4e' : '2px solid transparent',
+                            }}
+                            onMouseEnter={e => { if (!isActive) { e.currentTarget.style.color = '#e8e4ed'; e.currentTarget.style.background = 'rgba(255,255,255,.04)'; }}}
+                            onMouseLeave={e => { if (!isActive) { e.currentTarget.style.color = '#79628c'; e.currentTarget.style.background = 'transparent'; }}}
+                        >
+                            <span className="flex-shrink-0 w-5 h-5 flex items-center justify-center">
+                                {React.cloneElement(item.icon, { className: 'w-4 h-4' })}
+                            </span>
+                            {isOpen && <span>{item.label}</span>}
+                        </Link>
+                    );
+                })}
             </div>
-            
-            <div className="p-4 border-t border-gray-700">
-                <button 
+
+            {/* Logout */}
+            <div className="p-3" style={{ borderTop: '1px solid #362d59' }}>
+                <button
                     onClick={logout}
-                    className="flex items-center w-full px-3 py-2 text-gray-300 rounded-md hover:bg-danger hover:text-white transition-colors"
+                    className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg transition-all"
+                    style={{ color: '#79628c', fontSize: 14, fontWeight: 500 }}
+                    onMouseEnter={e => { e.currentTarget.style.background = 'rgba(250,127,170,.12)'; e.currentTarget.style.color = '#fa7faa'; }}
+                    onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#79628c'; }}
                 >
-                    <FiLogOut className={`w-5 h-5 ${isOpen ? 'mr-3' : 'mx-auto'}`} />
-                    <span className={`${!isOpen && 'hidden'}`}>Logout</span>
+                    <FiLogOut className="w-4 h-4 flex-shrink-0" />
+                    {isOpen && <span>Logout</span>}
                 </button>
             </div>
         </div>

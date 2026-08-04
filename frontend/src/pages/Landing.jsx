@@ -1,164 +1,212 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-    FiCheckCircle, FiZap, FiShield, FiBarChart2, FiUsers, FiBox, FiClock,
-    FiSmartphone, FiMonitor, FiCloud, FiChevronDown, FiStar, FiMail, FiMapPin, FiPhone, FiShoppingCart
+import {
+    FiCheckCircle, FiZap, FiShield, FiBarChart2, FiUsers, FiBox,
+    FiMonitor, FiCloud, FiChevronDown, FiStar, FiMail, FiMapPin, FiPhone, FiShoppingCart
 } from 'react-icons/fi';
 
 const Landing = () => {
     const [activeFaq, setActiveFaq] = useState(null);
-
-    const toggleFaq = (index) => {
-        setActiveFaq(activeFaq === index ? null : index);
-    };
+    const toggleFaq = (i) => setActiveFaq(activeFaq === i ? null : i);
 
     return (
-        <div className="min-h-screen bg-gray-50 font-sans text-gray-800 scroll-smooth">
-            {/* 1. Navbar */}
-            <nav className="bg-white/80 backdrop-blur-md shadow-sm border-b border-gray-100 px-8 py-4 flex justify-between items-center sticky top-0 z-50">
-                <div className="text-2xl font-bold text-primary flex items-center">
-                    <span className="bg-gradient-to-br from-primary to-blue-400 text-white p-2 rounded-lg mr-2 shadow-sm">P</span>
-                    POS Pro
-                </div>
-                <div className="hidden md:flex space-x-6 text-sm font-medium text-gray-600">
-                    <a href="#features" className="hover:text-primary transition-colors">Features</a>
-                    <a href="#how-it-works" className="hover:text-primary transition-colors">How it Works</a>
-                    <a href="#pricing" className="hover:text-primary transition-colors">Pricing</a>
-                    <a href="#faq" className="hover:text-primary transition-colors">FAQ</a>
-                </div>
-                <div className="space-x-4">
-                    <Link to="/login" className="text-gray-600 hover:text-primary font-medium transition-colors">Log In</Link>
-                    <Link to="/login" className="bg-primary text-white px-6 py-2.5 rounded-full hover:bg-blue-700 transition-all shadow-md hover:shadow-lg font-medium">Get Started</Link>
+        <div style={{ fontFamily: "'Rubik', -apple-system, system-ui, sans-serif" }}
+            className="min-h-screen bg-[#1f1633] text-white">
+
+            <style>{`
+                @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap');
+                @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+                .float { animation: float 4s ease-in-out infinite; }
+                .stars-bg {
+                    background-image: radial-gradient(circle, rgba(255,255,255,.08) 1px, transparent 1px),
+                                      radial-gradient(circle, rgba(255,255,255,.04) 1px, transparent 1px);
+                    background-size: 60px 60px, 30px 30px;
+                    background-position: 0 0, 15px 15px;
+                }
+                .lime-chip {
+                    background:#c2ef4e; color:#1f1633; border-radius:4px; padding:0 10px; display:inline;
+                }
+                .btn-inverted {
+                    background:#fff; color:#1f1633; border-radius:8px; padding:12px 20px;
+                    font-size:14px; font-weight:700; letter-spacing:.2px; text-transform:uppercase;
+                    box-shadow: rgba(0,0,0,.08) 0 2px 8px 0; cursor:pointer; display:inline-block;
+                    transition: background .15s;
+                }
+                .btn-inverted:hover { background:#f0f0f0; }
+                .btn-ghost {
+                    background:rgba(255,255,255,.1); color:#fff; border-radius:12px; padding:10px 18px;
+                    font-size:14px; font-weight:500; letter-spacing:.2px; text-transform:uppercase; cursor:pointer; display:inline-block;
+                    transition: background .15s;
+                }
+                .btn-ghost:hover { background:rgba(255,255,255,.18); }
+                .card-dark { background:#1f1633; border:1px solid #362d59; border-radius:18px; padding:32px; }
+                .squiggle { color:#c2ef4e; font-size:28px; letter-spacing:-2px; }
+            `}</style>
+
+            {/* 1. NAVBAR */}
+            <nav className="sticky top-0 z-50 border-b border-[#362d59]"
+                style={{ background: 'rgba(31,22,51,.9)', backdropFilter: 'blur(16px)' }}>
+                <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+                    <div className="flex items-center gap-2 text-xl font-bold text-white">
+                        <span className="bg-[#c2ef4e] text-[#1f1633] px-2 py-0.5 rounded font-black text-sm tracking-wider">POS</span>
+                        <span>Pro</span>
+                    </div>
+                    <div className="hidden md:flex gap-8 text-sm font-medium text-[#bdb8c0]">
+                        <a href="#features" className="hover:text-white transition-colors">Features</a>
+                        <a href="#how-it-works" className="hover:text-white transition-colors">How It Works</a>
+                        <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
+                        <a href="#faq" className="hover:text-white transition-colors">FAQ</a>
+                    </div>
+                    <div className="flex items-center gap-3">
+                        <Link to="/login" className="btn-ghost">Log In</Link>
+                        <Link to="/login" className="btn-inverted">Get Started</Link>
+                    </div>
                 </div>
             </nav>
 
-            {/* 2. Hero Section */}
-            <header className="bg-white pt-28 pb-24 text-center px-4 relative overflow-hidden">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-50 via-white to-transparent opacity-70"></div>
+            {/* 2. HERO */}
+            <header className="stars-bg pt-28 pb-32 text-center px-4 relative overflow-hidden border-b border-[#362d59]">
+                <div className="absolute top-20 left-1/4 w-64 h-64 bg-[#422082] rounded-full opacity-20 blur-3xl"></div>
+                <div className="absolute bottom-10 right-1/4 w-48 h-48 bg-[#c2ef4e] rounded-full opacity-10 blur-3xl"></div>
+                <div className="float absolute top-24 right-16 text-6xl opacity-70 select-none hidden lg:block">🛒</div>
+                <div className="float absolute bottom-20 left-20 text-5xl opacity-60 select-none hidden lg:block" style={{animationDelay:'.8s'}}>📊</div>
                 <div className="max-w-4xl mx-auto relative z-10">
-                    <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-50 text-primary font-medium text-sm mb-8 border border-blue-100">
-                        <span className="flex h-2 w-2 rounded-full bg-primary mr-2 animate-pulse"></span>
-                        POS Pro v2.0 is now live!
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#150f23] border border-[#362d59] text-[#bdb8c0] text-xs font-semibold uppercase tracking-widest mb-10">
+                        <span className="w-2 h-2 bg-[#c2ef4e] rounded-full animate-pulse"></span>
+                        Powering retail across Tanzania
                     </div>
-                    <h1 className="text-5xl md:text-7xl font-extrabold text-secondary tracking-tight mb-8 leading-[1.1]">
-                        The Ultimate <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400">Point of Sale</span> For Modern Retail
+                    <h1 className="text-5xl md:text-7xl font-bold leading-[1.1] mb-8 tracking-tight">
+                        The POS System built for{' '}
+                        <span className="lime-chip">modern</span>{' '}retail
                     </h1>
-                    <p className="text-xl text-gray-500 max-w-2xl mx-auto mb-10 leading-relaxed">
-                        Manage inventory, process sales, and grow your business with a lightning-fast, cloud-based POS system designed for ambition.
+                    <p className="text-lg text-[#bdb8c0] max-w-2xl mx-auto mb-12 leading-[2]">
+                        Manage your inventory, process sales in seconds, and grow your business — all from one beautifully simple platform.
                     </p>
                     <div className="flex flex-col sm:flex-row justify-center gap-4">
-                        <Link to="/login" className="px-8 py-4 bg-primary text-white rounded-full font-bold shadow-lg shadow-blue-200 hover:-translate-y-1 hover:shadow-xl transition-all text-lg">
-                            Start Your Free Trial
-                        </Link>
-                        <a href="#dashboard" className="px-8 py-4 bg-white border-2 border-gray-200 text-gray-700 rounded-full font-bold hover:bg-gray-50 hover:border-gray-300 transition-all text-lg">
-                            See it in action
-                        </a>
+                        <Link to="/login" className="btn-inverted">Start Free Trial</Link>
+                        <a href="#dashboard" className="btn-ghost">See it in action →</a>
                     </div>
-                    <p className="mt-6 text-sm text-gray-400">No credit card required. 14-day free trial.</p>
+                    <p className="mt-6 text-xs text-[#79628c] tracking-wider uppercase">No credit card required · 14-day free trial</p>
                 </div>
             </header>
 
-            {/* 3. Trusted By */}
-            <section className="py-10 bg-white border-y border-gray-100">
-                <div className="max-w-7xl mx-auto px-8 text-center">
-                    <p className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-6">Trusted by 5,000+ businesses worldwide</p>
-                    <div className="flex flex-wrap justify-center gap-12 md:gap-24 opacity-50 grayscale">
-                        <div className="text-2xl font-black font-serif">TechStore</div>
-                        <div className="text-2xl font-black font-sans tracking-tighter">FreshMart</div>
-                        <div className="text-2xl font-black font-mono">Boutique.co</div>
-                        <div className="text-2xl font-black font-sans italic">Cafe Bean</div>
-                        <div className="text-2xl font-black tracking-widest">LUMINA</div>
+            {/* 3. TRUSTED BY */}
+            <section className="py-12 border-b border-[#362d59]">
+                <div className="max-w-6xl mx-auto px-6 text-center">
+                    <p className="text-xs font-semibold uppercase tracking-widest text-[#79628c] mb-8">Trusted by businesses across Tanzania</p>
+                    <div className="flex flex-wrap justify-center gap-12 md:gap-20 opacity-40">
+                        {["TechStore DSM", "FreshMart Arusha", "Boutique Mwanza", "Cafe Zanzibar", "LUMINA Retail"].map(b => (
+                            <div key={b} className="text-xl font-black tracking-tight">{b}</div>
+                        ))}
                     </div>
                 </div>
             </section>
 
-            {/* 4. Features */}
-            <section id="features" className="py-24 bg-gray-50">
-                <div className="max-w-7xl mx-auto px-8">
+            {/* 4. FEATURES */}
+            <section id="features" className="py-24 border-b border-[#362d59]">
+                <div className="max-w-6xl mx-auto px-6">
                     <div className="text-center mb-16">
-                        <h2 className="text-4xl font-bold text-secondary mb-4">Everything you need to succeed</h2>
-                        <p className="text-xl text-gray-500 max-w-2xl mx-auto">Powerful features wrapped in an incredibly easy-to-use interface.</p>
+                        <p className="text-xs font-semibold uppercase tracking-widest text-[#c2ef4e] mb-4">What POS Pro Does</p>
+                        <h2 className="text-4xl md:text-5xl font-bold mb-4">Everything you need to <span className="lime-chip">succeed</span></h2>
+                        <p className="text-[#bdb8c0] text-lg max-w-2xl mx-auto leading-relaxed">Powerful features wrapped in a simple interface. No training required.</p>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {[
-                            { icon: <FiZap />, title: "Lightning Fast Checkout", desc: "Process transactions in seconds. Keep your lines moving and your customers happy." },
-                            { icon: <FiBox />, title: "Inventory Management", desc: "Track stock levels in real-time. Get low-stock alerts before you run out." },
-                            { icon: <FiBarChart2 />, title: "Real-time Analytics", desc: "Make data-driven decisions with comprehensive sales and performance reports." },
-                            { icon: <FiUsers />, title: "Customer Loyalty", desc: "Build lasting relationships with built-in customer profiles and loyalty points." },
-                            { icon: <FiShield />, title: "Bank-level Security", desc: "Your data is encrypted and securely backed up to the cloud automatically." },
-                            { icon: <FiCloud />, title: "Multi-Store Ready", desc: "Manage one store or one hundred from a single, centralized dashboard." }
-                        ].map((feature, i) => (
-                            <div key={i} className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all">
-                                <div className="w-14 h-14 bg-blue-50 text-primary rounded-xl flex items-center justify-center mb-6">
-                                    {React.cloneElement(feature.icon, { className: 'w-6 h-6' })}
+                            { icon: <FiZap />, title: "Lightning Fast Checkout", desc: "Process transactions in under 3 seconds. Barcode scanning, custom discounts, and multi-payment support.", color: "text-[#c2ef4e]", bg: "bg-[#c2ef4e]/10" },
+                            { icon: <FiBox />, title: "Smart Inventory", desc: "Track stock in real-time. Get low-stock alerts before you run out and reorder automatically.", color: "text-[#fa7faa]", bg: "bg-[#fa7faa]/10" },
+                            { icon: <FiBarChart2 />, title: "Real-time Analytics", desc: "Beautiful dashboards showing your daily sales, top products, and revenue trends — always live.", color: "text-[#c2ef4e]", bg: "bg-[#c2ef4e]/10" },
+                            { icon: <FiUsers />, title: "Customer Profiles", desc: "Track who your best customers are. Build loyalty and understand their purchasing patterns.", color: "text-[#fa7faa]", bg: "bg-[#fa7faa]/10" },
+                            { icon: <FiShield />, title: "Role-based Access", desc: "Separate admin, manager, and cashier views. Sensitive data stays secure at every level.", color: "text-[#c2ef4e]", bg: "bg-[#c2ef4e]/10" },
+                            { icon: <FiCloud />, title: "Cloud Synced", desc: "All your data is safely backed up to the cloud. Access your store from any device, anywhere.", color: "text-[#fa7faa]", bg: "bg-[#fa7faa]/10" },
+                        ].map((f, i) => (
+                            <div key={i} className="card-dark hover:border-[#79628c] transition-colors group">
+                                <div className={`w-12 h-12 ${f.bg} ${f.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+                                    {React.cloneElement(f.icon, { className: 'w-5 h-5' })}
                                 </div>
-                                <h3 className="text-xl font-bold text-secondary mb-3">{feature.title}</h3>
-                                <p className="text-gray-500 leading-relaxed">{feature.desc}</p>
+                                <h3 className="text-lg font-semibold mb-3">{f.title}</h3>
+                                <p className="text-[#bdb8c0] text-sm leading-relaxed">{f.desc}</p>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* 5. How It Works */}
-            <section id="how-it-works" className="py-24 bg-white border-y border-gray-100">
-                <div className="max-w-7xl mx-auto px-8">
+            {/* 5. HOW IT WORKS */}
+            <section id="how-it-works" className="py-24 border-b border-[#362d59] stars-bg">
+                <div className="max-w-6xl mx-auto px-6">
                     <div className="text-center mb-16">
-                        <h2 className="text-4xl font-bold text-secondary mb-4">How it works</h2>
-                        <p className="text-xl text-gray-500">Get up and running in minutes, not days.</p>
+                        <p className="text-xs font-semibold uppercase tracking-widest text-[#c2ef4e] mb-4">Simple Setup</p>
+                        <h2 className="text-4xl font-bold">Up and running in <span className="lime-chip">minutes</span></h2>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
-                        <div className="hidden md:block absolute top-10 left-[15%] right-[15%] h-0.5 bg-gray-100 -z-10"></div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                         {[
-                            { step: "01", title: "Add your products", desc: "Import your inventory via CSV or add items manually with our intuitive interface." },
-                            { step: "02", title: "Start selling", desc: "Use our blazing-fast POS interface to ring up customers and process payments." },
-                            { step: "03", title: "Track & Grow", desc: "Watch your sales grow in real-time through the beautiful analytics dashboard." }
+                            { step: "01", title: "Add Your Products", desc: "Import your inventory via CSV or add items manually. Set prices, barcodes, and stock levels in seconds." },
+                            { step: "02", title: "Start Selling", desc: "Our blazing-fast POS interface lets cashiers ring up customers and process payments instantly." },
+                            { step: "03", title: "Track & Grow", desc: "Watch your sales grow in real-time through your analytics dashboard. Make data-driven decisions daily." },
                         ].map((item, i) => (
-                            <div key={i} className="text-center bg-white">
-                                <div className="w-20 h-20 mx-auto bg-primary text-white rounded-full flex items-center justify-center mb-6 shadow-xl shadow-blue-200 ring-8 ring-white">
-                                    <span className="text-2xl font-bold">{item.step}</span>
+                            <div key={i} className="text-center">
+                                <div className="w-20 h-20 mx-auto bg-[#150f23] border-2 border-[#c2ef4e] text-[#c2ef4e] rounded-full flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(194,239,78,.2)]">
+                                    <span className="text-2xl font-black font-mono">{item.step}</span>
                                 </div>
-                                <h3 className="text-xl font-bold text-secondary mb-3">{item.title}</h3>
-                                <p className="text-gray-500 leading-relaxed">{item.desc}</p>
+                                <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
+                                <p className="text-[#bdb8c0] leading-relaxed">{item.desc}</p>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* 6. Dashboard Preview */}
-            <section id="dashboard" className="py-24 bg-gray-900 text-white overflow-hidden relative">
-                <div className="absolute top-0 right-0 -mr-40 -mt-40 w-96 h-96 rounded-full bg-primary opacity-20 blur-3xl"></div>
-                <div className="absolute bottom-0 left-0 -ml-40 -mb-40 w-96 h-96 rounded-full bg-blue-400 opacity-20 blur-3xl"></div>
-                
-                <div className="max-w-7xl mx-auto px-8 relative z-10 text-center">
-                    <h2 className="text-4xl font-bold mb-6">A dashboard you'll love using</h2>
-                    <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-16">Clean, intuitive, and designed to give you total control over your business.</p>
-                    
-                    <div className="rounded-2xl overflow-hidden border border-gray-700 shadow-2xl shadow-black/50 bg-gray-800 p-2 mx-auto max-w-5xl transform hover:scale-[1.02] transition-transform duration-500">
-                        {/* Mock Dashboard UI */}
-                        <div className="bg-gray-50 rounded-xl overflow-hidden h-[500px] flex text-left">
-                            <div className="w-48 bg-white border-r border-gray-200 p-4 hidden sm:block">
-                                <div className="h-6 w-24 bg-gray-200 rounded mb-8"></div>
-                                <div className="space-y-4">
-                                    {[1,2,3,4,5].map(i => <div key={i} className={`h-8 rounded ${i===1 ? 'bg-blue-50' : 'bg-gray-50'}`}></div>)}
+            {/* 6. DASHBOARD PREVIEW */}
+            <section id="dashboard" className="py-24 border-b border-[#362d59]">
+                <div className="max-w-6xl mx-auto px-6 text-center">
+                    <p className="text-xs font-semibold uppercase tracking-widest text-[#c2ef4e] mb-4">Product Preview</p>
+                    <h2 className="text-4xl font-bold mb-4">A dashboard you'll <span className="lime-chip">love</span> using</h2>
+                    <p className="text-[#bdb8c0] mb-16 max-w-xl mx-auto leading-relaxed">Clean, intuitive, and designed for total visibility into your business.</p>
+                    <div className="rounded-[18px] overflow-hidden border border-[#362d59] shadow-2xl bg-[#150f23] p-1.5 mx-auto max-w-5xl hover:scale-[1.01] transition-transform duration-500">
+                        <div className="bg-gray-100 rounded-[14px] overflow-hidden h-[480px] flex text-left">
+                            <div className="w-44 bg-[#1f1633] border-r border-[#362d59] p-4 hidden sm:block">
+                                <div className="flex items-center gap-1.5 mb-8">
+                                    <span className="bg-[#c2ef4e] text-[#1f1633] px-1.5 py-0.5 rounded text-xs font-black">POS</span>
+                                    <span className="text-white font-bold text-sm">Pro</span>
+                                </div>
+                                <div className="space-y-2">
+                                    {["Dashboard","Products","POS","Sales","Reports","Settings"].map((item, i) => (
+                                        <div key={item} className={`h-8 rounded-lg px-3 flex items-center text-xs font-medium ${i === 0 ? 'bg-[#422082] text-white' : 'text-[#79628c]'}`}>{item}</div>
+                                    ))}
                                 </div>
                             </div>
-                            <div className="flex-1 p-8">
-                                <div className="h-8 w-48 bg-gray-200 rounded mb-8"></div>
-                                <div className="grid grid-cols-4 gap-4 mb-8">
-                                    {[1,2,3,4].map(i => <div key={i} className="h-24 bg-white rounded-xl shadow-sm border border-gray-100"></div>)}
+                            <div className="flex-1 p-6 bg-gray-50">
+                                <div className="h-7 w-52 bg-gray-200 rounded mb-6"></div>
+                                <div className="grid grid-cols-4 gap-3 mb-6">
+                                    {[['#dbeafe','#2563eb'],['#d1fae5','#059669'],['#fef9c3','#d97706'],['#fce7f3','#db2777']].map(([bg, c], i) => (
+                                        <div key={i} className="h-20 bg-white rounded-xl shadow-sm border border-gray-100 p-3 flex items-center gap-2">
+                                            <div className="w-8 h-8 rounded-lg flex-shrink-0 flex items-center justify-center" style={{background: bg}}>
+                                                <div className="w-4 h-4 rounded" style={{background: c, opacity:.6}}></div>
+                                            </div>
+                                            <div><div className="h-2 w-10 bg-gray-200 rounded mb-1.5"></div><div className="h-3 w-14 bg-gray-300 rounded"></div></div>
+                                        </div>
+                                    ))}
                                 </div>
-                                <div className="grid grid-cols-3 gap-6">
-                                    <div className="col-span-2 h-64 bg-white rounded-xl shadow-sm border border-gray-100 p-4 flex flex-col justify-end gap-2">
-                                        {/* Mock Chart */}
-                                        <div className="flex items-end h-full gap-2 px-4">
-                                            {[40, 70, 45, 90, 65, 100, 80].map((h, i) => (
-                                                <div key={i} className="flex-1 bg-primary/20 rounded-t-sm" style={{height: `${h}%`}}></div>
+                                <div className="grid grid-cols-3 gap-4">
+                                    <div className="col-span-2 h-56 bg-white rounded-xl shadow-sm border border-gray-100 p-4">
+                                        <div className="h-3 w-28 bg-gray-200 rounded mb-4"></div>
+                                        <div className="flex items-end h-36 gap-2 px-2">
+                                            {[40,70,45,90,65,100,80].map((h,i) => (
+                                                <div key={i} className="flex-1 rounded-t" style={{height:`${h}%`, background: i === 5 ? '#c2ef4e' : '#422082', opacity: i === 5 ? 1 : .6}}></div>
                                             ))}
                                         </div>
                                     </div>
-                                    <div className="col-span-1 h-64 bg-white rounded-xl shadow-sm border border-gray-100"></div>
+                                    <div className="col-span-1 h-56 bg-white rounded-xl shadow-sm border border-gray-100 p-4">
+                                        <div className="h-3 w-20 bg-gray-200 rounded mb-4"></div>
+                                        <div className="space-y-3 mt-2">
+                                            {[80,65,50,40,30].map((w, i) => (
+                                                <div key={i} className="flex items-center gap-2">
+                                                    <div className="w-2 h-2 rounded-full bg-[#422082] flex-shrink-0"></div>
+                                                    <div className="h-2 rounded bg-gray-200" style={{width:`${w}%`}}></div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -166,110 +214,97 @@ const Landing = () => {
                 </div>
             </section>
 
-            {/* 7. Benefits */}
-            <section className="py-24 bg-white">
-                <div className="max-w-7xl mx-auto px-8">
+            {/* 7. BENEFITS */}
+            <section className="py-24 border-b border-[#362d59] stars-bg">
+                <div className="max-w-6xl mx-auto px-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                         <div>
-                            <h2 className="text-4xl font-bold text-secondary mb-6">Work smarter, not harder</h2>
-                            <p className="text-lg text-gray-500 mb-8 leading-relaxed">
-                                Our platform automates the tedious parts of running a store, freeing you up to focus on what matters most: your customers and your growth.
-                            </p>
+                            <p className="text-xs font-semibold uppercase tracking-widest text-[#c2ef4e] mb-4">Why Switch to POS Pro</p>
+                            <h2 className="text-4xl font-bold mb-6 leading-tight">Work <span className="lime-chip">smarter</span>,<br />not harder</h2>
+                            <p className="text-[#bdb8c0] mb-10 leading-[2]">Our platform automates the tedious parts of running a store, freeing you to focus on your customers and growth.</p>
                             <ul className="space-y-4">
-                                {[
-                                    "Cut checkout time by up to 40%",
-                                    "Reduce inventory shrinkage with accurate tracking",
-                                    "Save 10+ hours a week on accounting and reports",
-                                    "Access your business data from anywhere, anytime"
-                                ].map((benefit, i) => (
-                                    <li key={i} className="flex items-center text-gray-700 font-medium">
-                                        <FiCheckCircle className="text-success w-6 h-6 mr-3 flex-shrink-0" />
-                                        {benefit}
+                                {["Cut checkout time by up to 40%","Reduce inventory errors with real-time tracking","Save 10+ hours a week on reports and accounting","Access your store data from anywhere, anytime"].map((b, i) => (
+                                    <li key={i} className="flex items-center gap-3 font-medium">
+                                        <span className="w-5 h-5 bg-[#c2ef4e]/20 text-[#c2ef4e] rounded-full flex items-center justify-center flex-shrink-0">
+                                            <FiCheckCircle className="w-3 h-3" />
+                                        </span>
+                                        {b}
                                     </li>
                                 ))}
                             </ul>
                         </div>
                         <div className="grid grid-cols-2 gap-4">
-                            <div className="space-y-4 pt-8">
-                                <div className="bg-blue-50 rounded-2xl p-6 text-center">
-                                    <p className="text-4xl font-black text-primary mb-2">40%</p>
-                                    <p className="text-sm font-medium text-gray-600">Faster Checkout</p>
+                            {[
+                                { v: "40%", l: "Faster Checkout", cls: "bg-[#c2ef4e]/10 border border-[#c2ef4e]/20 text-[#c2ef4e]" },
+                                { v: "99.9%", l: "Uptime SLA", cls: "bg-[#fa7faa]/10 border border-[#fa7faa]/20 text-[#fa7faa]" },
+                                { v: "10h+", l: "Saved Weekly", cls: "bg-[#422082]/60 border border-[#362d59] text-white" },
+                                { v: "24/7", l: "Support", cls: "bg-[#c2ef4e]/10 border border-[#c2ef4e]/20 text-[#c2ef4e]" },
+                            ].map((s, i) => (
+                                <div key={i} className={`rounded-2xl p-6 text-center ${s.cls}`}>
+                                    <p className="text-4xl font-black mb-2">{s.v}</p>
+                                    <p className="text-sm font-medium text-[#bdb8c0]">{s.l}</p>
                                 </div>
-                                <div className="bg-green-50 rounded-2xl p-6 text-center">
-                                    <p className="text-4xl font-black text-success mb-2">99%</p>
-                                    <p className="text-sm font-medium text-gray-600">Uptime Reliability</p>
-                                </div>
-                            </div>
-                            <div className="space-y-4">
-                                <div className="bg-purple-50 rounded-2xl p-6 text-center">
-                                    <p className="text-4xl font-black text-purple-600 mb-2">10h+</p>
-                                    <p className="text-sm font-medium text-gray-600">Saved Weekly</p>
-                                </div>
-                                <div className="bg-orange-50 rounded-2xl p-6 text-center">
-                                    <p className="text-4xl font-black text-orange-500 mb-2">24/7</p>
-                                    <p className="text-sm font-medium text-gray-600">Support Access</p>
-                                </div>
-                            </div>
+                            ))}
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* 8. Industries Served */}
-            <section className="py-24 bg-gray-50 border-y border-gray-100">
-                <div className="max-w-7xl mx-auto px-8 text-center">
-                    <h2 className="text-4xl font-bold text-secondary mb-4">Built for your industry</h2>
-                    <p className="text-xl text-gray-500 mb-16">Flexible enough to handle any retail environment.</p>
-                    
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {/* 8. INDUSTRIES SERVED */}
+            <section className="py-24 border-b border-[#362d59]">
+                <div className="max-w-6xl mx-auto px-6 text-center">
+                    <p className="text-xs font-semibold uppercase tracking-widest text-[#c2ef4e] mb-4">Industries</p>
+                    <h2 className="text-4xl font-bold mb-4">Built for your <span className="lime-chip">industry</span></h2>
+                    <p className="text-[#bdb8c0] mb-16 max-w-xl mx-auto">Flexible enough to handle any retail environment in Tanzania.</p>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         {[
-                            { name: "Retail & Apparel", icon: <FiShoppingCart /> },
-                            { name: "Supermarkets", icon: <FiBox /> },
-                            { name: "Electronics", icon: <FiMonitor /> },
-                            { name: "Pharmacies", icon: <FiShield /> },
+                            { name: "Retail & Apparel", emoji: "👗" },
+                            { name: "Supermarkets", emoji: "🛒" },
+                            { name: "Electronics", emoji: "📱" },
+                            { name: "Pharmacies", emoji: "💊" },
                         ].map((ind, i) => (
-                            <div key={i} className="bg-white p-8 rounded-xl border border-gray-200 hover:border-primary hover:shadow-md transition-all group cursor-pointer">
-                                <div className="w-12 h-12 mx-auto bg-gray-50 text-gray-400 group-hover:bg-primary group-hover:text-white rounded-full flex items-center justify-center mb-4 transition-colors">
-                                    {React.cloneElement(ind.icon, { className: 'w-5 h-5' })}
-                                </div>
-                                <h3 className="font-bold text-gray-800">{ind.name}</h3>
+                            <div key={i} className="card-dark hover:border-[#c2ef4e]/50 group cursor-pointer transition-all text-center">
+                                <div className="text-4xl mb-4 group-hover:scale-125 transition-transform">{ind.emoji}</div>
+                                <h3 className="font-semibold text-sm">{ind.name}</h3>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* 9. Pricing */}
-            <section id="pricing" className="py-24 bg-white">
-                <div className="max-w-7xl mx-auto px-8">
+            {/* 9. PRICING */}
+            <section id="pricing" className="py-24 border-b border-[#362d59] stars-bg">
+                <div className="max-w-6xl mx-auto px-6">
                     <div className="text-center mb-16">
-                        <h2 className="text-4xl font-bold text-secondary mb-4">Simple, transparent pricing</h2>
-                        <p className="text-xl text-gray-500">No hidden fees. Cancel anytime.</p>
+                        <p className="text-xs font-semibold uppercase tracking-widest text-[#c2ef4e] mb-4">Pricing</p>
+                        <h2 className="text-4xl font-bold mb-4">Simple, <span className="lime-chip">transparent</span> pricing</h2>
+                        <p className="text-[#bdb8c0]">No hidden fees. All prices in Tanzania Shillings. Cancel anytime.</p>
                     </div>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto items-stretch">
                         {[
-                            { name: "Basic", price: "50,000", desc: "Perfect for single-location small businesses.", features: ["1 Register", "Up to 1,000 Products", "Basic Reporting", "Email Support"] },
-                            { name: "Pro", price: "150,000", desc: "For growing businesses that need more power.", features: ["3 Registers", "Unlimited Products", "Advanced Analytics", "Inventory Alerts", "24/7 Priority Support"], popular: true },
-                            { name: "Enterprise", price: "400,000", desc: "Full-scale solution for retail chains.", features: ["Unlimited Registers", "Multi-store Management", "API Access", "Custom Integrations", "Dedicated Account Manager"] }
+                            { name: "Starter", price: "50,000", desc: "Perfect for small single-location shops.", features: ["1 Register", "Up to 1,000 Products", "Basic Reporting", "Email Support"], featured: false },
+                            { name: "Pro", price: "150,000", desc: "For growing businesses that need more power.", features: ["3 Registers", "Unlimited Products", "Advanced Analytics", "Low-stock Alerts", "24/7 Priority Support"], featured: true },
+                            { name: "Enterprise", price: "400,000", desc: "Full-scale for retail chains across Tanzania.", features: ["Unlimited Registers", "Multi-store Management", "API Access", "Dedicated Manager"], featured: false },
                         ].map((tier, i) => (
-                            <div key={i} className={`bg-white rounded-3xl border ${tier.popular ? 'border-primary shadow-2xl relative scale-105 z-10' : 'border-gray-200 shadow-sm'} p-8 flex flex-col`}>
-                                {tier.popular && <span className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wide">Most Popular</span>}
-                                <h3 className="text-2xl font-bold text-secondary mb-2">{tier.name}</h3>
-                                <p className="text-gray-500 text-sm mb-6 h-10">{tier.desc}</p>
+                            <div key={i} className={`relative flex flex-col rounded-xl p-8 border ${tier.featured ? 'bg-[#150f23] border-[#c2ef4e]/40' : 'bg-[#1f1633] border-[#362d59]'}`}>
+                                {tier.featured && (
+                                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#c2ef4e] text-[#150f23] text-xs font-black uppercase tracking-widest px-4 py-1 rounded-full">Most Popular</span>
+                                )}
+                                <h3 className="text-xl font-bold mb-2">{tier.name}</h3>
+                                <p className="text-[#bdb8c0] text-sm mb-6 h-10">{tier.desc}</p>
                                 <div className="mb-8">
-                                    <span className="text-5xl font-black text-secondary">TZS</span>
-                                    <span className="text-2xl font-black text-secondary"> {tier.price}</span>
-                                    <span className="text-gray-500 font-medium">/mo</span>
+                                    <span className="text-xs font-semibold text-[#79628c] uppercase tracking-widest">TZS </span>
+                                    <span className="text-4xl font-black">{tier.price}</span>
+                                    <span className="text-[#79628c] text-sm">/mo</span>
                                 </div>
-                                <ul className="space-y-4 mb-8 flex-1">
+                                <ul className="space-y-3 mb-8 flex-1">
                                     {tier.features.map((f, j) => (
-                                        <li key={j} className="flex items-center text-sm font-medium text-gray-700">
-                                            <FiCheckCircle className="text-primary mr-3 w-5 h-5 flex-shrink-0" /> {f}
+                                        <li key={j} className="flex items-center gap-3 text-sm font-medium text-[#bdb8c0]">
+                                            <span className="text-[#c2ef4e]">✓</span> {f}
                                         </li>
                                     ))}
                                 </ul>
-                                <button className={`w-full py-4 rounded-xl font-bold transition-colors ${tier.popular ? 'bg-primary text-white hover:bg-blue-700' : 'bg-gray-50 text-gray-800 hover:bg-gray-100'}`}>
+                                <button className={`w-full py-3 rounded-lg font-bold text-sm uppercase tracking-wider transition-colors ${tier.featured ? 'bg-[#c2ef4e] text-[#150f23] hover:bg-[#d4f76a]' : 'bg-[#150f23] text-white border border-[#362d59] hover:border-[#79628c]'}`}>
                                     Choose {tier.name}
                                 </button>
                             </div>
@@ -278,26 +313,27 @@ const Landing = () => {
                 </div>
             </section>
 
-            {/* 10. Testimonials */}
-            <section className="py-24 bg-blue-50 border-y border-blue-100">
-                <div className="max-w-7xl mx-auto px-8 text-center">
-                    <h2 className="text-4xl font-bold text-secondary mb-16">Loved by business owners</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* 10. TESTIMONIALS */}
+            <section className="py-24 border-b border-[#362d59]">
+                <div className="max-w-6xl mx-auto px-6 text-center">
+                    <p className="text-xs font-semibold uppercase tracking-widest text-[#c2ef4e] mb-4">Testimonials</p>
+                    <h2 className="text-4xl font-bold mb-16">Loved by <span className="lime-chip">business owners</span></h2>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {[
-                            { name: "Sarah Jenkins", role: "Owner, The Daily Grind", quote: "Switching to POS Pro was the best decision for my cafe. Training new cashiers takes 5 minutes, and the analytics helped me optimize my inventory." },
-                            { name: "Marcus Chen", role: "Manager, TechHaven", quote: "The barcode scanning is incredibly fast, and the real-time stock alerts have completely eliminated our out-of-stock issues." },
-                            { name: "Emily Rodriguez", role: "CEO, Style Boutique", quote: "Beautiful interface and rock-solid reliability. We processed over 500 transactions on Black Friday without a single hiccup." }
+                            { name: "Amina Salehe", role: "Owner, Salehe Boutique – Dar es Salaam", quote: "Switching to POS Pro was the best business decision I made. My cashiers learned it in 5 minutes and queue times dropped dramatically." },
+                            { name: "John Mkude", role: "Manager, TechHub – Arusha", quote: "The barcode scanning speed is unreal. Real-time stock alerts mean we never run out of best-selling items anymore." },
+                            { name: "Fatuma Ali", role: "CEO, Style Hub – Zanzibar", quote: "Beautiful interface and rock-solid reliability. We processed 500+ transactions during Eid weekend without a single hiccup." },
                         ].map((t, i) => (
-                            <div key={i} className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 text-left relative">
-                                <div className="flex text-yellow-400 mb-4">
-                                    {[1,2,3,4,5].map(star => <FiStar key={star} className="fill-current w-4 h-4" />)}
+                            <div key={i} className="card-dark text-left">
+                                <div className="flex text-[#c2ef4e] mb-4 gap-0.5">
+                                    {[1,2,3,4,5].map(s => <FiStar key={s} className="w-4 h-4 fill-current" />)}
                                 </div>
-                                <p className="text-gray-600 italic mb-6">"{t.quote}"</p>
-                                <div className="flex items-center">
-                                    <div className="w-10 h-10 bg-gray-200 rounded-full mr-3"></div>
+                                <p className="text-[#bdb8c0] italic mb-6 leading-relaxed text-sm">"{t.quote}"</p>
+                                <div className="flex items-center gap-3">
+                                    <div className="w-10 h-10 bg-[#422082] rounded-full flex items-center justify-center text-sm font-bold">{t.name[0]}</div>
                                     <div>
-                                        <h4 className="font-bold text-sm text-secondary">{t.name}</h4>
-                                        <p className="text-xs text-gray-500">{t.role}</p>
+                                        <h4 className="font-semibold text-sm">{t.name}</h4>
+                                        <p className="text-xs text-[#79628c]">{t.role}</p>
                                     </div>
                                 </div>
                             </div>
@@ -306,55 +342,47 @@ const Landing = () => {
                 </div>
             </section>
 
-            {/* 11. Statistics */}
-            <section className="py-20 bg-primary text-white">
-                <div className="max-w-7xl mx-auto px-8">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/20">
-                        <div>
-                            <div className="text-4xl md:text-5xl font-black mb-2">10M+</div>
-                            <div className="text-blue-100 font-medium text-sm uppercase tracking-wide">Transactions Processed</div>
-                        </div>
-                        <div>
-                            <div className="text-4xl md:text-5xl font-black mb-2">5,000+</div>
-                            <div className="text-blue-100 font-medium text-sm uppercase tracking-wide">Active Stores</div>
-                        </div>
-                        <div>
-                            <div className="text-4xl md:text-5xl font-black mb-2">TZS 2T+</div>
-                            <div className="text-blue-100 font-medium text-sm uppercase tracking-wide">Sales Volume</div>
-                        </div>
-                        <div>
-                            <div className="text-4xl md:text-5xl font-black mb-2">99.9%</div>
-                            <div className="text-blue-100 font-medium text-sm uppercase tracking-wide">Uptime</div>
-                        </div>
+            {/* 11. STATISTICS */}
+            <section className="py-20 bg-[#150f23] border-b border-[#362d59]">
+                <div className="max-w-6xl mx-auto px-6">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-[#362d59]">
+                        {[
+                            { v: "10M+", l: "Transactions Processed" },
+                            { v: "5,000+", l: "Active Stores" },
+                            { v: "TZS 2T+", l: "Sales Volume" },
+                            { v: "99.9%", l: "Uptime" },
+                        ].map((s, i) => (
+                            <div key={i}>
+                                <div className="text-4xl md:text-5xl font-black text-[#c2ef4e] mb-2">{s.v}</div>
+                                <div className="text-[#79628c] font-medium text-xs uppercase tracking-widest">{s.l}</div>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </section>
 
             {/* 12. FAQ */}
-            <section id="faq" className="py-24 bg-white">
-                <div className="max-w-3xl mx-auto px-8">
+            <section id="faq" className="py-24 border-b border-[#362d59] stars-bg">
+                <div className="max-w-3xl mx-auto px-6">
                     <div className="text-center mb-16">
-                        <h2 className="text-4xl font-bold text-secondary mb-4">Frequently Asked Questions</h2>
+                        <p className="text-xs font-semibold uppercase tracking-widest text-[#c2ef4e] mb-4">FAQ</p>
+                        <h2 className="text-4xl font-bold">Common <span className="lime-chip">questions</span></h2>
                     </div>
-                    <div className="space-y-4">
+                    <div className="space-y-3">
                         {[
-                            { q: "What hardware do I need?", a: "POS Pro runs in any modern web browser. You can use your existing PC, Mac, iPad, or Android tablet. It integrates seamlessly with standard USB/Bluetooth barcode scanners and receipt printers." },
-                            { q: "Can I use it offline?", a: "POS Pro is primarily cloud-based to ensure real-time syncing across devices. However, our Pro and Enterprise plans offer an offline mode that syncs automatically once your connection is restored." },
-                            { q: "How easy is it to import my existing inventory?", a: "Very easy! You can upload a standard CSV file with your product details, barcodes, and stock levels, and our system will instantly populate your store database." },
-                            { q: "Is there a contract or commitment?", a: "No. POS Pro operates on a month-to-month subscription. You can upgrade, downgrade, or cancel your account at any time without penalty." }
+                            { q: "What hardware do I need?", a: "POS Pro works in any modern browser. Use your existing PC, Mac, iPad, or Android tablet. Supports standard USB/Bluetooth barcode scanners and receipt printers." },
+                            { q: "Can I use it offline?", a: "POS Pro is cloud-based for real-time syncing. Our Pro and Enterprise plans include an offline mode that syncs automatically when reconnected." },
+                            { q: "How do I import my existing inventory?", a: "Simply upload a CSV file with your product details, barcodes, and stock levels. Our system populates your store database instantly." },
+                            { q: "Is there a contract or commitment?", a: "No contracts. Month-to-month subscription. Upgrade, downgrade, or cancel anytime without penalty." },
+                            { q: "Is my data safe?", a: "All data is encrypted and backed up to secure cloud servers. We use bank-level security with role-based access controls throughout." },
                         ].map((faq, i) => (
-                            <div key={i} className="border border-gray-200 rounded-xl overflow-hidden">
-                                <button 
-                                    className="w-full px-6 py-4 text-left font-bold text-secondary flex justify-between items-center bg-gray-50 hover:bg-gray-100 transition-colors"
-                                    onClick={() => toggleFaq(i)}
-                                >
+                            <div key={i} className="border border-[#362d59] rounded-xl overflow-hidden bg-[#150f23]">
+                                <button className="w-full px-6 py-4 text-left font-semibold flex justify-between items-center hover:bg-[#1f1633] transition-colors" onClick={() => toggleFaq(i)}>
                                     {faq.q}
-                                    <FiChevronDown className={`transform transition-transform ${activeFaq === i ? 'rotate-180' : ''}`} />
+                                    <FiChevronDown className={`transition-transform flex-shrink-0 text-[#79628c] ${activeFaq === i ? 'rotate-180' : ''}`} />
                                 </button>
                                 {activeFaq === i && (
-                                    <div className="px-6 py-4 text-gray-600 bg-white border-t border-gray-100">
-                                        {faq.a}
-                                    </div>
+                                    <div className="px-6 py-4 text-[#bdb8c0] bg-[#1f1633] border-t border-[#362d59] text-sm leading-relaxed">{faq.a}</div>
                                 )}
                             </div>
                         ))}
@@ -362,84 +390,70 @@ const Landing = () => {
                 </div>
             </section>
 
-            {/* 13. Call To Action */}
-            <section className="bg-secondary py-24 px-8 text-center relative overflow-hidden">
-                <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary via-transparent to-transparent"></div>
+            {/* 13. CALL TO ACTION */}
+            <section className="py-28 px-6 text-center relative overflow-hidden bg-[#150f23] border-b border-[#362d59]">
+                <div className="absolute inset-0 stars-bg"></div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#422082] rounded-full opacity-30 blur-3xl"></div>
+                <div className="float absolute top-10 right-20 text-5xl select-none hidden lg:block">🚀</div>
                 <div className="max-w-3xl mx-auto relative z-10">
-                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Ready to transform your retail business?</h2>
-                    <p className="text-gray-400 mb-10 text-lg">Join thousands of merchants who are growing their businesses with POS Pro. Start your 14-day free trial today.</p>
-                    <Link to="/login" className="inline-block px-10 py-5 bg-primary text-white rounded-full font-bold text-lg shadow-xl shadow-blue-900/50 hover:shadow-2xl hover:scale-105 transition-all">
-                        Create Your Free Account
-                    </Link>
+                    <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                        Ready to <span className="lime-chip">transform</span><br />your retail business?
+                    </h2>
+                    <p className="text-[#bdb8c0] mb-12 text-lg leading-[2]">Join thousands of Tanzanian merchants growing with POS Pro. Your 14-day free trial starts today.</p>
+                    <Link to="/login" className="btn-inverted text-lg px-10 py-5">Create Your Free Account →</Link>
                 </div>
             </section>
 
-            {/* 14. Contact & 15. Footer */}
-            <footer className="bg-gray-900 text-gray-400 pt-20 pb-10 px-8 border-t border-gray-800">
-                <div className="max-w-7xl mx-auto">
+            {/* 14. CONTACT + 15. FOOTER */}
+            <footer className="bg-[#0e0a19] text-[#bdb8c0] pt-20 pb-10 px-8 border-t border-[#362d59]">
+                <div className="text-center mb-12">
+                    <div className="squiggle">〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜</div>
+                </div>
+                <div className="max-w-6xl mx-auto">
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-                        <div className="col-span-1 md:col-span-1">
-                            <div className="text-2xl font-bold text-white flex items-center mb-6">
-                                <span className="bg-primary text-white p-1.5 rounded-lg mr-2 text-sm">P</span>
-                                POS Pro
+                        <div>
+                            <div className="flex items-center gap-2 text-xl font-bold text-white mb-6">
+                                <span className="bg-[#c2ef4e] text-[#1f1633] px-2 py-0.5 rounded font-black text-sm">POS</span>
+                                <span>Pro</span>
                             </div>
-                            <p className="text-sm leading-relaxed mb-6">
-                                The smartest, fastest, and most reliable point of sale system for modern retail businesses.
-                            </p>
-                            <div className="flex space-x-4">
-                                <div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white cursor-pointer transition-colors">in</div>
-                                <div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white cursor-pointer transition-colors">tw</div>
-                                <div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white cursor-pointer transition-colors">fb</div>
+                            <p className="text-sm leading-relaxed mb-6">The smartest, fastest, and most reliable POS for Tanzania's modern retail businesses.</p>
+                            <div className="flex gap-3">
+                                {["in","tw","fb"].map(s => (
+                                    <div key={s} className="w-9 h-9 rounded-full border border-[#362d59] flex items-center justify-center text-xs font-bold hover:bg-[#c2ef4e] hover:text-[#150f23] hover:border-[#c2ef4e] cursor-pointer transition-all">{s}</div>
+                                ))}
                             </div>
                         </div>
-                        
                         <div>
-                            <h4 className="text-white font-bold mb-6">Product</h4>
+                            <h4 className="text-white font-bold mb-6 text-xs uppercase tracking-widest">Product</h4>
                             <ul className="space-y-3 text-sm">
-                                <li><a href="#" className="hover:text-primary transition-colors">Features</a></li>
-                                <li><a href="#" className="hover:text-primary transition-colors">Pricing</a></li>
-                                <li><a href="#" className="hover:text-primary transition-colors">Hardware</a></li>
-                                <li><a href="#" className="hover:text-primary transition-colors">Integrations</a></li>
-                                <li><a href="#" className="hover:text-primary transition-colors">Updates</a></li>
+                                {["Features","Pricing","Hardware","Integrations","Changelog"].map(l => (
+                                    <li key={l}><a href="#" className="hover:text-[#c2ef4e] transition-colors">{l}</a></li>
+                                ))}
                             </ul>
                         </div>
-                        
                         <div>
-                            <h4 className="text-white font-bold mb-6">Company</h4>
+                            <h4 className="text-white font-bold mb-6 text-xs uppercase tracking-widest">Company</h4>
                             <ul className="space-y-3 text-sm">
-                                <li><a href="#" className="hover:text-primary transition-colors">About Us</a></li>
-                                <li><a href="#" className="hover:text-primary transition-colors">Careers</a></li>
-                                <li><a href="#" className="hover:text-primary transition-colors">Blog</a></li>
-                                <li><a href="#" className="hover:text-primary transition-colors">Contact</a></li>
+                                {["About Us","Careers","Blog","Contact","Partners"].map(l => (
+                                    <li key={l}><a href="#" className="hover:text-[#c2ef4e] transition-colors">{l}</a></li>
+                                ))}
                             </ul>
                         </div>
-
-                        {/* Contact Section within Footer */}
                         <div>
-                            <h4 className="text-white font-bold mb-6">Contact Us</h4>
+                            <h4 className="text-white font-bold mb-6 text-xs uppercase tracking-widest">Contact Us</h4>
                             <ul className="space-y-4 text-sm">
-                                <li className="flex items-start">
-                                    <FiMapPin className="mr-3 mt-1 text-gray-500 shrink-0" />
-                                    <span>100 Innovation Drive,<br/>Tech City, TC 90210</span>
-                                </li>
-                                <li className="flex items-center">
-                                    <FiPhone className="mr-3 text-gray-500 shrink-0" />
-                                    <span>+1 (800) 123-4567</span>
-                                </li>
-                                <li className="flex items-center">
-                                    <FiMail className="mr-3 text-gray-500 shrink-0" />
-                                    <span>support@pospro.com</span>
-                                </li>
+                                <li className="flex items-start gap-3"><FiMapPin className="mt-1 text-[#79628c] flex-shrink-0" /><span>Kinondoni, Dar es Salaam,<br />Tanzania</span></li>
+                                <li className="flex items-center gap-3"><FiPhone className="text-[#79628c] flex-shrink-0" /><span>+255 800 123 456</span></li>
+                                <li className="flex items-center gap-3"><FiMail className="text-[#79628c] flex-shrink-0" /><span>support@pospro.co.tz</span></li>
                             </ul>
                         </div>
                     </div>
-                    
-                    <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-xs">
-                        <p>&copy; {new Date().getFullYear()} POS Pro Technologies Inc. All rights reserved.</p>
-                        <div className="flex space-x-6 mt-4 md:mt-0">
-                            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-                            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-                            <a href="#" className="hover:text-white transition-colors">Cookie Policy</a>
+                    <div className="border-t border-[#362d59] pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-[#79628c]">
+                        <p>© {new Date().getFullYear()} POS Pro Technologies Ltd. All rights reserved.</p>
+                        <div className="flex gap-6 mt-4 md:mt-0">
+                            {["Privacy Policy","Terms of Service","Cookie Policy"].map(l => (
+                                <a key={l} href="#" className="hover:text-white transition-colors">{l}</a>
+                            ))}
                         </div>
                     </div>
                 </div>

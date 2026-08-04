@@ -1,36 +1,91 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap');
 
 @theme {
-  --color-primary: #2563EB;
-  --color-secondary: #0F172A;
-  --color-success: #22C55E;
+  /* ── Sentry-inspired design tokens ── */
+  --color-primary: #c2ef4e;          /* electric lime accent */
+  --color-secondary: #1f1633;        /* ink / dark canvas */
+  --color-surface: #150f23;          /* surface-night */
+  --color-canvas: #1f1633;           /* surface-canvas-dark */
+  --color-hairline: #362d59;         /* hairline-violet */
+  --color-violet: #422082;           /* accent-violet-deep */
+  --color-muted: #bdb8c0;            /* on-dark-muted */
+  --color-faint: #79628c;            /* accent-violet-mid */
+  --color-success: #c2ef4e;          /* lime = success */
   --color-warning: #F59E0B;
-  --color-danger: #EF4444;
-  --color-background: #F8FAFC;
+  --color-danger: #fa7faa;           /* accent-pink */
+  --color-background: #150f23;       /* global dark background */
 }
 
 body {
-  background-color: var(--color-background);
-  color: var(--color-secondary);
-  font-family: sans-serif;
+  background-color: #150f23;
+  color: #e8e4ed;
+  font-family: 'Rubik', -apple-system, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+/* ── Custom Scrollbar (dark style) ── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #1f1633; }
+::-webkit-scrollbar-thumb { background: #362d59; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #79628c; }
+
+/* ── Shared Utility: starfield bg ── */
+.stars-bg {
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,.06) 1px, transparent 1px),
+    radial-gradient(circle, rgba(255,255,255,.03) 1px, transparent 1px);
+  background-size: 60px 60px, 30px 30px;
+  background-position: 0 0, 15px 15px;
 }
 
-::-webkit-scrollbar-track {
-  background: #f1f5f9;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+/* ── Lime chip (keyword highlight) ── */
+.lime-chip {
+  background: #c2ef4e;
+  color: #1f1633;
   border-radius: 4px;
+  padding: 0 10px;
+  display: inline;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+/* ── Sentry card (dark surface with hairline border) ── */
+.sentry-card {
+  background: #1f1633;
+  border: 1px solid #362d59;
+  border-radius: 12px;
+  padding: 24px;
 }
+
+/* ── Table styling for dark theme ── */
+table { border-collapse: collapse; width: 100%; }
+thead th { color: #79628c; text-transform: uppercase; font-size: 11px; letter-spacing: .06em; font-weight: 600; padding: 12px 16px; border-bottom: 1px solid #362d59; }
+tbody tr { border-bottom: 1px solid #362d59; transition: background .15s; }
+tbody tr:hover { background: rgba(255,255,255,.03); }
+tbody td { padding: 14px 16px; font-size: 14px; color: #bdb8c0; }
+tbody td:first-child { color: #e8e4ed; font-weight: 500; }
+
+/* ── Form inputs dark theme ── */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+select,
+textarea {
+  background: #1f1633 !important;
+  color: #e8e4ed !important;
+  border: 1px solid #362d59 !important;
+  border-radius: 8px;
+  padding: 10px 14px;
+  width: 100%;
+  font-family: 'Rubik', sans-serif;
+  font-size: 14px;
+  transition: border-color .15s;
+}
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #c2ef4e !important;
+  box-shadow: 0 0 0 3px rgba(194,239,78,.15);
+}
+input::placeholder, textarea::placeholder { color: #79628c; }
+select option { background: #1f1633; }
+label { color: #bdb8c0; font-size: 13px; font-weight: 500; display: block; margin-bottom: 6px; }
