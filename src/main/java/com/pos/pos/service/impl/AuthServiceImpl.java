@@ -41,9 +41,6 @@ public class AuthServiceImpl implements AuthService {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
-import com.pos.pos.dto.JwtAuthResponse;
-import org.springframework.security.core.GrantedAuthority;
-
     @Override
     public JwtAuthResponse login(LoginDto loginDto) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
