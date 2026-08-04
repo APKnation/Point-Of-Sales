@@ -12,7 +12,12 @@ const Login = () => {
         e.preventDefault();
         const success = await login(usernameOrEmail, password);
         if (success) {
-            navigate('/dashboard');
+            const role = localStorage.getItem('role');
+            if (role === 'ROLE_CASHIER') {
+                navigate('/pos');
+            } else {
+                navigate('/dashboard');
+            }
         }
     };
 
