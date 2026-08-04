@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FiDownload, FiCalendar, FiDollarSign, FiTrendingUp } from 'react-icons/fi';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar } from 'recharts';
+import { formatTZS } from '../utils/currency';
 import api from '../services/api';
 import Swal from 'sweetalert2';
 
@@ -61,7 +62,7 @@ const Reports = () => {
                     <div>
                         <p className="text-sm text-gray-500 font-medium">Total Revenue</p>
                         <p className="text-2xl font-bold text-secondary">
-                            ${salesData.reduce((acc, curr) => acc + curr.total, 0).toFixed(2)}
+                            {formatTZS(salesData.reduce((acc, curr) => acc + curr.total, 0))}
                         </p>
                     </div>
                 </div>
@@ -72,7 +73,7 @@ const Reports = () => {
                     <div>
                         <p className="text-sm text-gray-500 font-medium">Average Order Value</p>
                         <p className="text-2xl font-bold text-secondary">
-                            ${salesData.length > 0 ? (salesData.reduce((acc, curr) => acc + curr.total, 0) / salesData.length).toFixed(2) : '0.00'}
+                            {salesData.length > 0 ? formatTZS(salesData.reduce((acc, curr) => acc + curr.total, 0) / salesData.length) : 'TZS 0'}
                         </p>
                     </div>
                 </div>

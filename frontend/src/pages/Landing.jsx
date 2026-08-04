@@ -249,16 +249,17 @@ const Landing = () => {
                     
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                         {[
-                            { name: "Basic", price: "29", desc: "Perfect for single-location small businesses.", features: ["1 Register", "Up to 1,000 Products", "Basic Reporting", "Email Support"] },
-                            { name: "Pro", price: "79", desc: "For growing businesses that need more power.", features: ["3 Registers", "Unlimited Products", "Advanced Analytics", "Inventory Alerts", "24/7 Priority Support"], popular: true },
-                            { name: "Enterprise", price: "199", desc: "Full-scale solution for retail chains.", features: ["Unlimited Registers", "Multi-store Management", "API Access", "Custom Integrations", "Dedicated Account Manager"] }
+                            { name: "Basic", price: "50,000", desc: "Perfect for single-location small businesses.", features: ["1 Register", "Up to 1,000 Products", "Basic Reporting", "Email Support"] },
+                            { name: "Pro", price: "150,000", desc: "For growing businesses that need more power.", features: ["3 Registers", "Unlimited Products", "Advanced Analytics", "Inventory Alerts", "24/7 Priority Support"], popular: true },
+                            { name: "Enterprise", price: "400,000", desc: "Full-scale solution for retail chains.", features: ["Unlimited Registers", "Multi-store Management", "API Access", "Custom Integrations", "Dedicated Account Manager"] }
                         ].map((tier, i) => (
                             <div key={i} className={`bg-white rounded-3xl border ${tier.popular ? 'border-primary shadow-2xl relative scale-105 z-10' : 'border-gray-200 shadow-sm'} p-8 flex flex-col`}>
                                 {tier.popular && <span className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wide">Most Popular</span>}
                                 <h3 className="text-2xl font-bold text-secondary mb-2">{tier.name}</h3>
                                 <p className="text-gray-500 text-sm mb-6 h-10">{tier.desc}</p>
                                 <div className="mb-8">
-                                    <span className="text-5xl font-black text-secondary">${tier.price}</span>
+                                    <span className="text-5xl font-black text-secondary">TZS</span>
+                                    <span className="text-2xl font-black text-secondary"> {tier.price}</span>
                                     <span className="text-gray-500 font-medium">/mo</span>
                                 </div>
                                 <ul className="space-y-4 mb-8 flex-1">
@@ -318,7 +319,7 @@ const Landing = () => {
                             <div className="text-blue-100 font-medium text-sm uppercase tracking-wide">Active Stores</div>
                         </div>
                         <div>
-                            <div className="text-4xl md:text-5xl font-black mb-2">$2B+</div>
+                            <div className="text-4xl md:text-5xl font-black mb-2">TZS 2T+</div>
                             <div className="text-blue-100 font-medium text-sm uppercase tracking-wide">Sales Volume</div>
                         </div>
                         <div>
