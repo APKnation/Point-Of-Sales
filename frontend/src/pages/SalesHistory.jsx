@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FiEye, FiSearch } from 'react-icons/fi';
 import { getAllSales } from '../services/saleService';
 import Modal from '../components/Modal';
+import { formatTZS } from '../utils/currency';
 import Swal from 'sweetalert2';
 
 const SalesHistory = () => {
@@ -58,7 +59,7 @@ const SalesHistory = () => {
                                         <td className="px-6 py-4 text-sm">
                                             <span className="px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">{s.paymentMethod}</span>
                                         </td>
-                                        <td className="px-6 py-4 text-sm font-bold text-success">${s.grandTotal?.toFixed(2)}</td>
+                                        <td className="px-6 py-4 text-sm font-bold text-success">{formatTZS(s.grandTotal)}</td>
                                         <td className="px-6 py-4 text-sm">
                                             <button onClick={() => setSelectedSale(s)} className="text-primary hover:text-blue-700"><FiEye className="w-4 h-4" /></button>
                                         </td>
@@ -84,16 +85,16 @@ const SalesHistory = () => {
                                 {selectedSale.items?.map((item, i) => (
                                     <div key={i} className="flex justify-between text-sm">
                                         <span>Product #{item.productId} x{item.quantity}</span>
-                                        <span className="font-medium">${item.total?.toFixed(2)}</span>
+                                        <span>{formatTZS(item.total)}</span>
                                     </div>
                                 ))}
                             </div>
                         </div>
                         <div className="border-t pt-3 space-y-1 text-sm">
-                            <div className="flex justify-between"><span className="text-gray-500">Subtotal</span><span>${selectedSale.subTotal?.toFixed(2)}</span></div>
-                            <div className="flex justify-between"><span className="text-gray-500">Tax</span><span>${selectedSale.tax?.toFixed(2)}</span></div>
-                            <div className="flex justify-between"><span className="text-gray-500">Discount</span><span>-${selectedSale.discount?.toFixed(2)}</span></div>
-                            <div className="flex justify-between font-bold text-base border-t pt-2"><span>Total</span><span className="text-success">${selectedSale.grandTotal?.toFixed(2)}</span></div>
+                            <div className="flex justify-between"><span className="text-gray-500">Subtotal</span><span>{formatTZS(selectedSale.subTotal)}</span></div>
+                            <div className="flex justify-between"><span className="text-gray-500">Tax</span><span>{formatTZS(selectedSale.tax)}</span></div>
+                            <div className="flex justify-between"><span className="text-gray-500">Discount</span><span>-{formatTZS(selectedSale.discount)}</span></div>
+                            <div className="flex justify-between font-bold text-base border-t pt-2"><span>Total</span><span className="text-success">{formatTZS(selectedSale.grandTotal)}</span></div>
                         </div>
                     </div>
                 )}

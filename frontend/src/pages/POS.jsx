@@ -3,6 +3,7 @@ import { FiTrash2, FiSearch, FiShoppingCart, FiPlus, FiMinus } from 'react-icons
 import { getAllProducts, getProductByBarcode } from '../services/productService';
 import { getAllCustomers } from '../services/customerService';
 import { createSale } from '../services/saleService';
+import { formatTZS } from '../utils/currency';
 import Swal from 'sweetalert2';
 
 const POS = () => {
@@ -127,7 +128,7 @@ const POS = () => {
                                 </div>
                                 <p className="text-sm font-medium text-secondary truncate">{p.productName}</p>
                                 <p className="text-xs text-gray-500 mt-0.5">Stock: {p.quantity}</p>
-                                <p className="text-primary font-bold mt-1">${parseFloat(p.sellingPrice).toFixed(2)}</p>
+                                <p className="text-primary font-bold mt-1">{formatTZS(p.sellingPrice)}</p>
                             </button>
                         ))}
                         {filteredProducts.length === 0 && (
@@ -154,14 +155,14 @@ const POS = () => {
                         <div key={item.productId} className="flex items-center gap-2 bg-gray-50 rounded-lg p-2.5">
                             <div className="flex-1 min-w-0">
                                 <p className="text-sm font-medium text-secondary truncate">{item.productName}</p>
-                                <p className="text-xs text-gray-500">${item.unitPrice.toFixed(2)}</p>
+                                <p className="text-xs text-gray-500">{formatTZS(item.unitPrice)}</p>
                             </div>
                             <div className="flex items-center gap-1">
                                 <button onClick={() => updateQty(item.productId, -1)} className="w-6 h-6 rounded bg-gray-200 hover:bg-gray-300 flex items-center justify-center"><FiMinus className="w-3 h-3" /></button>
                                 <span className="w-8 text-center text-sm font-medium">{item.quantity}</span>
                                 <button onClick={() => updateQty(item.productId, 1)} className="w-6 h-6 rounded bg-gray-200 hover:bg-gray-300 flex items-center justify-center"><FiPlus className="w-3 h-3" /></button>
                             </div>
-                            <span className="text-sm font-bold text-primary w-16 text-right">${item.total.toFixed(2)}</span>
+                            <span className="text-sm font-bold text-primary w-20 text-right">{formatTZS(item.total)}</span>
                             <button onClick={() => removeFromCart(item.productId)} className="text-danger ml-1"><FiTrash2 className="w-4 h-4" /></button>
                         </div>
                     ))}
@@ -182,7 +183,7 @@ const POS = () => {
                             <input type="number" className="w-full mt-1 border border-gray-300 rounded-lg px-3 py-2 text-sm" value={tax} onChange={e => setTax(parseFloat(e.target.value) || 0)} />
                         </div>
                         <div>
-                            <label className="text-xs font-medium text-gray-600">Discount ($)</label>
+                            <label className="text-xs font-medium text-gray-600">Discount (TZS)</label>
                             <input type="number" className="w-full mt-1 border border-gray-300 rounded-lg px-3 py-2 text-sm" value={discount} onChange={e => setDiscount(parseFloat(e.target.value) || 0)} />
                         </div>
                     </div>
@@ -197,10 +198,10 @@ const POS = () => {
                     </div>
 
                     <div className="space-y-1 text-sm border-t pt-2">
-                        <div className="flex justify-between text-gray-500"><span>Subtotal</span><span>${subTotal.toFixed(2)}</span></div>
-                        <div className="flex justify-between text-gray-500"><span>Tax ({tax}%)</span><span>${taxAmount.toFixed(2)}</span></div>
-                        <div className="flex justify-between text-gray-500"><span>Discount</span><span>-${discountAmount.toFixed(2)}</span></div>
-                        <div className="flex justify-between font-bold text-base border-t pt-1"><span>Total</span><span className="text-success">${grandTotal.toFixed(2)}</span></div>
+                        <div className="flex justify-between text-gray-500"><span>Subtotal</span><span>{formatTZS(subTotal)}</span></div>
+                        <div className="flex justify-between text-gray-500"><span>Tax ({tax}%)</span><span>{formatTZS(taxAmount)}</span></div>
+                        <div className="flex justify-between text-gray-500"><span>Discount</span><span>-{formatTZS(discountAmount)}</span></div>
+                        <div className="flex justify-between font-bold text-base border-t pt-1"><span>Total</span><span className="text-success">{formatTZS(grandTotal)}</span></div>
                     </div>
 
                     <button
@@ -208,7 +209,7 @@ const POS = () => {
                         disabled={loading || cart.length === 0}
                         className="w-full bg-primary text-white py-3 rounded-lg font-bold text-sm hover:bg-blue-700 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                     >
-                        {loading ? 'Processing...' : `Complete Sale • $${grandTotal.toFixed(2)}`}
+                        {loading ? 'Processing...' : `Complete Sale • ${formatTZS(grandTotal)}`}
                     </button>
                 </div>
             </div>

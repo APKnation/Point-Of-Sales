@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FiDollarSign, FiShoppingBag, FiUsers, FiBox } from 'react-icons/fi';
+import { formatTZS } from '../utils/currency';
 import { 
     LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
     BarChart, Bar
@@ -65,7 +66,7 @@ const Dashboard = () => {
     }, []);
 
     const summaryCards = [
-        { title: "Today's Sales", value: `$${stats.todaySales?.toFixed(2) || '0.00'}`, icon: <FiDollarSign />, color: "bg-primary" },
+        { title: "Today's Sales", value: formatTZS(stats.todaySales || 0), icon: <FiDollarSign />, color: "bg-primary" },
         { title: "Total Products", value: stats.totalProducts || 0, icon: <FiBox />, color: "bg-success" },
         { title: "Total Customers", value: stats.totalCustomers || 0, icon: <FiUsers />, color: "bg-warning" },
         { title: "Low Stock Items", value: stats.lowStockProducts || 0, icon: <FiShoppingBag />, color: "bg-danger" },

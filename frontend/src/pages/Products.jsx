@@ -4,6 +4,7 @@ import { getAllProducts, createProduct, updateProduct, deleteProduct } from '../
 import { getAllCategories } from '../services/categoryService';
 import Modal from '../components/Modal';
 import { confirmDelete } from '../components/ConfirmDialog';
+import { formatTZS } from '../utils/currency';
 import Swal from 'sweetalert2';
 
 const Products = () => {
@@ -122,8 +123,8 @@ const Products = () => {
                                         <td className="px-6 py-4 text-sm font-medium text-secondary">{p.productName}</td>
                                         <td className="px-6 py-4 text-sm text-gray-500">{p.barcode || '-'}</td>
                                         <td className="px-6 py-4 text-sm text-gray-500">{categories.find(c => c.id === p.categoryId)?.name || '-'}</td>
-                                        <td className="px-6 py-4 text-sm text-gray-500">${p.costPrice}</td>
-                                        <td className="px-6 py-4 text-sm font-medium text-success">${p.sellingPrice}</td>
+                                        <td className="px-6 py-4 text-sm text-gray-500">{formatTZS(p.costPrice)}</td>
+                                        <td className="px-6 py-4 text-sm font-medium text-success">{formatTZS(p.sellingPrice)}</td>
                                         <td className="px-6 py-4 text-sm">
                                             <span className={`font-medium ${p.quantity <= 0 ? 'text-danger' : p.quantity <= (p.reorderLevel || 10) ? 'text-warning' : 'text-success'}`}>
                                                 {p.quantity}
