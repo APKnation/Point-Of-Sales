@@ -17,6 +17,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         { path: '/categories', icon: <FiList />, label: 'Categories', roles: ['ROLE_ADMIN', 'ROLE_MANAGER'] },
         { path: '/sales', icon: <FiTrendingUp />, label: 'Sales History', roles: ['ROLE_ADMIN', 'ROLE_MANAGER'] },
         { path: '/customers', icon: <FiUsers />, label: 'Customers', roles: ['ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_CASHIER'] },
+        { path: '/reports', icon: <FiTrendingUp />, label: 'Reports', roles: ['ROLE_ADMIN', 'ROLE_MANAGER'] },
         { path: '/settings', icon: <FiSettings />, label: 'Settings', roles: ['ROLE_ADMIN'] },
     ];
 
